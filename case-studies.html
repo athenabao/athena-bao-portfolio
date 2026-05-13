@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Studies — Athena Bao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF7EC;
+    --ink: #1A1A2E;
+    --coral: #FF5A5F;
+    --hot: #FF2E93;
+    --lime: #B8FF5C;
+    --electric: #4D5BFF;
+    --yolk: #FFD93D;
+    --lavender: #D9C7FF;
+    --paper: #FFFCF5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--hot); color: var(--paper); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 36px;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 247, 236, 0.7);
+    border-bottom: 2px solid var(--ink);
+  }
+  nav .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  nav .logo .dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--hot);
+    display: inline-block;
+    animation: pulse 2.4s infinite ease-in-out;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); background: var(--hot); }
+    50% { transform: scale(1.3); background: var(--electric); }
+  }
+  nav ul { list-style: none; display: flex; gap: 28px; }
+  nav ul a {
+    font-weight: 500; font-size: 15px;
+    position: relative; padding: 4px 2px;
+  }
+  nav ul a.current { font-weight: 700; }
+  nav ul a::after {
+    content: ""; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 3px; background: var(--hot);
+    transition: width 0.3s ease;
+  }
+  nav ul a:hover::after, nav ul a.current::after { width: 100%; }
+
+  /* PAGE HEADER */
+  .page-head {
+    padding: 160px 36px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .page-head::before {
+    content: ""; position: absolute;
+    top: 100px; right: 6%;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, var(--lavender) 0%, transparent 70%);
+    z-index: -1;
+  }
+  .breadcrumb {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 8px;
+    color: #5a5a72;
+  }
+  .breadcrumb a:hover { color: var(--hot); }
+  h1.page-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 9vw, 130px);
+    line-height: 0.93;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+  h1.page-title em {
+    font-style: italic; color: var(--hot);
+  }
+  .page-sub {
+    font-size: 20px;
+    max-width: 640px;
+    color: #2c2c44;
+  }
+
+  /* CASE STUDY BLOCK */
+  .case {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 36px 90px;
+    border-top: 2px solid var(--ink);
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .case-meta {
+    position: sticky;
+    top: 110px;
+  }
+  .case-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+  .case h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+  .case-fact {
+    border-top: 1.5px solid var(--ink);
+    padding: 12px 0;
+    display: flex; justify-content: space-between; gap: 12px;
+    font-size: 14px;
+  }
+  .case-fact .k {
+    font-family: 'Space Mono', monospace;
+    color: #5a5a72;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .case-fact .v { text-align: right; font-weight: 500; max-width: 60%; }
+  .case-stack {
+    margin-top: 20px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .case-stack span {
+    border: 1.5px solid var(--ink);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+    background: var(--paper);
+  }
+
+  /* HERO VISUAL inside case */
+  .case-visual {
+    aspect-ratio: 16/9;
+    border: 2.5px solid var(--ink);
+    border-radius: 22px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .visual-apexys {
+    background: linear-gradient(135deg, #FF2E93 0%, #4D5BFF 100%);
+    display: grid; place-items: center;
+  }
+  .visual-apexys::before {
+    content: ""; position: absolute;
+    width: 60%; aspect-ratio: 1; border-radius: 50%;
+    border: 4px dashed rgba(255,255,255,0.5);
+    animation: spin 30s linear infinite;
+  }
+  .visual-apexys::after {
+    content: "₿  →  $  →  💸  →  🤝";
+    font-size: clamp(20px, 3vw, 36px);
+    color: var(--paper);
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    text-align: center;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .visual-safety {
+    background: linear-gradient(135deg, #B8FF5C 0%, #FFD93D 100%);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: end;
+    gap: 6px;
+    padding: 40px;
+  }
+  .visual-safety .bar {
+    background: var(--ink);
+    border-radius: 4px 4px 0 0;
+    transition: transform 0.6s ease;
+  }
+
+  /* CONTENT BLOCKS */
+  .block { margin-bottom: 40px; }
+  .block-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--hot);
+    margin-bottom: 10px;
+  }
+  .block h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .block p {
+    font-size: 17px;
+    color: #2c2c44;
+    margin-bottom: 14px;
+  }
+  .block ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .block ul li {
+    padding: 12px 0 12px 28px;
+    border-bottom: 1px solid rgba(26,26,46,0.12);
+    position: relative;
+    font-size: 16px;
+  }
+  .block ul li::before {
+    content: "→";
+    position: absolute; left: 0; top: 12px;
+    color: var(--hot);
+    font-weight: 700;
+  }
+
+  /* HIGHLIGHT QUOTE */
+  .pullquote {
+    background: var(--paper);
+    border: 2.5px solid var(--ink);
+    border-radius: 22px;
+    padding: 36px;
+    margin: 40px 0;
+    box-shadow: 6px 6px 0 var(--hot);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(22px, 2.5vw, 32px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .pullquote .mark { color: var(--hot); font-weight: 900; }
+
+  /* IMPACT GRID */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 24px 0;
+  }
+  .impact-card {
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 22px;
+    background: var(--paper);
+  }
+  .impact-card:nth-child(1) { background: var(--lime); }
+  .impact-card:nth-child(2) { background: var(--lavender); }
+  .impact-card:nth-child(3) { background: var(--yolk); }
+  .impact-card .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .impact-card .lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* DIVIDER */
+  .case-divider {
+    text-align: center;
+    padding: 30px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--hot);
+    letter-spacing: 0.4em;
+  }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    text-align: center;
+    padding: 100px 36px 130px;
+    border-top: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .bottom-cta h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+  .bottom-cta h2 em { color: var(--yolk); font-style: italic; }
+  .bottom-cta p { font-size: 18px; max-width: 540px; margin: 0 auto 30px; opacity: 0.85; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px;
+    border: 2px solid var(--paper);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+  }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--hot); background: var(--yolk); }
+  .btn-ghost { background: transparent; color: var(--paper); }
+  .btn-ghost:hover { background: var(--hot); border-color: var(--hot); color: var(--paper); box-shadow: 6px 6px 0 var(--paper); }
+
+  footer {
+    padding: 24px 36px;
+    background: var(--ink); color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+    .page-head { padding: 110px 20px 40px; }
+    .case { padding: 50px 20px 70px; }
+    .case-grid { grid-template-columns: 1fr; gap: 28px; }
+    .case-meta { position: static; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .visual-safety { padding: 20px; gap: 3px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html"><span class="dot"></span>athena.bao</a>
+  <ul>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="case-studies.html" class="current">Case Studies</a></li>
+    <li><a href="index.html#gallery">Gallery</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-head">
+  <div class="breadcrumb">
+    <a href="index.html">← Back home</a> &nbsp;·&nbsp; Case Studies
+  </div>
+  <h1 class="page-title">A closer look at <em>the work.</em></h1>
+  <p class="page-sub">Two projects, two very different problems — but the same approach underneath: start with a real person, design the system around them, then make the technical choices serve that design.</p>
+</header>
+
+<!-- CASE 1: APEXYS -->
+<section class="case" id="apexys">
+  <div class="case-grid">
+
+    <aside class="case-meta">
+      <span class="case-tag">Fintech · Architecture</span>
+      <h2>Apexys</h2>
+      <div class="case-fact"><span class="k">Role</span><span class="v">Tech Lead & Architect</span></div>
+      <div class="case-fact"><span class="k">Timeline</span><span class="v">2026 — Ongoing</span></div>
+      <div class="case-fact"><span class="k">Team</span><span class="v">Solo on backend</span></div>
+      <div class="case-fact"><span class="k">Status</span><span class="v">In active development</span></div>
+      <div class="case-stack">
+        <span>Python</span><span>Express.js</span><span>JWT</span><span>REST</span><span>System Design</span>
+      </div>
+    </aside>
+
+    <div class="case-body">
+      <div class="case-visual visual-apexys"></div>
+
+      <div class="block">
+        <div class="block-label">The Problem</div>
+        <h3>People want to help their communities financially — but the tools don't trust them.</h3>
+        <p>Traditional lending platforms treat small, trust-based lending circles the way they treat banks: with rigid contracts, opaque processes, and zero visibility into where the money actually goes. The result is that most communities still rely on spreadsheets, group chats, and goodwill — which works until it doesn't.</p>
+      </div>
+
+      <div class="pullquote">
+        <span class="mark">"</span>How do you build software that's <em>transparent enough</em> to replace trust, but human enough to feel like family?<span class="mark">"</span>
+      </div>
+
+      <div class="block">
+        <div class="block-label">My Approach</div>
+        <h3>Design the architecture around accountability, not just transactions.</h3>
+        <p>I started by mapping the actual life cycle of a community lending circle — from forming a group, to pooling funds, to issuing a loan, to tracking repayments and distributing interest. Every step had to be auditable by every member, not just an admin.</p>
+        <p>From there I designed a modular REST API where each domain — communities, members, loans, transactions, messages — became its own resource boundary. JWT-based authentication gates everything, and authorization is scoped per-community so a member can't peek at a circle they aren't part of.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">What I Built</div>
+        <h3>The technical bits.</h3>
+        <ul>
+          <li>Modular REST API with clean separation between auth, communities, loans, and messaging.</li>
+          <li>JWT-based authentication and per-community authorization scopes.</li>
+          <li>Endpoints for the full loan lifecycle: application, approval, disbursement, repayment, and interest distribution.</li>
+          <li>Transaction logging that produces an immutable audit trail viewable by every member of a community.</li>
+          <li>Real-time messaging so members can discuss decisions inside the platform instead of fragmenting into group chats.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="block-label">Impact So Far</div>
+        <h3>Building toward launch.</h3>
+        <div class="impact-grid">
+          <div class="impact-card"><div class="num">5+</div><div class="lbl">Core resource domains</div></div>
+          <div class="impact-card"><div class="num">100%</div><div class="lbl">Transactions audit-logged</div></div>
+          <div class="impact-card"><div class="num">0</div><div class="lbl">Admin-only blind spots</div></div>
+        </div>
+        <p>Apexys is still pre-launch, but the architectural decisions made early — particularly around transparency-by-default — are the ones I'm proudest of. They make every future feature easier to trust.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">What I Took Away</div>
+        <h3>Lessons for the next one.</h3>
+        <p>Designing a fintech platform from scratch taught me that the hardest engineering decisions are usually the ones you make before you write any code. Picking the right resource boundaries, the right authorization model, and the right audit story upfront paid off every single week after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider">✦ ✦ ✦</div>
+
+<!-- CASE 2: SAFETY FIRST -->
+<section class="case" id="safety-first">
+  <div class="case-grid">
+
+    <aside class="case-meta">
+      <span class="case-tag">Data Viz · UX</span>
+      <h2>Safety First</h2>
+      <div class="case-fact"><span class="k">Role</span><span class="v">Designer + Developer</span></div>
+      <div class="case-fact"><span class="k">Timeline</span><span class="v">March 2026</span></div>
+      <div class="case-fact"><span class="k">Course</span><span class="v">Data Viz, UW Allen School</span></div>
+      <div class="case-fact"><span class="k">Status</span><span class="v">Delivered</span></div>
+      <div class="case-stack">
+        <span>JavaScript</span><span>Vega-Lite</span><span>D3.js</span><span>UX</span>
+      </div>
+    </aside>
+
+    <div class="case-body">
+      <div class="case-visual visual-safety">
+        <div class="bar" style="height:40%"></div>
+        <div class="bar" style="height:65%"></div>
+        <div class="bar" style="height:35%"></div>
+        <div class="bar" style="height:80%; background:#FF2E93;"></div>
+        <div class="bar" style="height:55%"></div>
+        <div class="bar" style="height:90%; background:#FF2E93;"></div>
+        <div class="bar" style="height:48%"></div>
+        <div class="bar" style="height:72%"></div>
+        <div class="bar" style="height:30%"></div>
+        <div class="bar" style="height:85%; background:#FF2E93;"></div>
+        <div class="bar" style="height:50%"></div>
+        <div class="bar" style="height:62%"></div>
+      </div>
+
+      <div class="block">
+        <div class="block-label">The Problem</div>
+        <h3>Traffic-fatality data is huge, public, and almost completely inaccessible.</h3>
+        <p>The federal FARS dataset contains millions of records that could meaningfully inform safer cars, safer roads, and safer policy. But you essentially need to be a data scientist to extract anything useful from it. Journalists, advocates, and curious citizens are locked out.</p>
+      </div>
+
+      <div class="pullquote">
+        <span class="mark">"</span>A dataset isn't useful until someone <em>without a stats degree</em> can ask it a question.<span class="mark">"</span>
+      </div>
+
+      <div class="block">
+        <div class="block-label">My Approach</div>
+        <h3>Treat the visualization like a story, not a dashboard.</h3>
+        <p>Most data tools I've seen front-load complexity — every filter, axis, and toggle visible at once. I wanted Safety First to start with a clear question ("how do vehicle characteristics relate to fatality rates?"), guide the user through a few preset views, and then let them branch out into custom exploration once they understood the shape of the data.</p>
+        <p>I leaned on Vega-Lite for the rapid, declarative views and used D3.js wherever I needed custom interactions or annotations that Vega-Lite couldn't express cleanly.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">What I Built</div>
+        <h3>An interactive analysis surface.</h3>
+        <ul>
+          <li>Linked Vega-Lite charts that filter each other on selection — pick a vehicle class on one chart, watch the rest update.</li>
+          <li>D3-powered custom annotations to flag statistical outliers and notable patterns.</li>
+          <li>Aggregation controls (by year, vehicle type, region) so users can zoom from the national picture down to specifics.</li>
+          <li>Side-by-side comparison views for testing hypotheses without writing a single line of code.</li>
+          <li>An accessible color palette designed to remain legible for users with color vision differences.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="block-label">Impact</div>
+        <h3>What changed.</h3>
+        <div class="impact-grid">
+          <div class="impact-card"><div class="num">1M+</div><div class="lbl">FARS records made queryable</div></div>
+          <div class="impact-card"><div class="num">8</div><div class="lbl">Linked, interactive views</div></div>
+          <div class="impact-card"><div class="num">0</div><div class="lbl">Code required to use it</div></div>
+        </div>
+        <p>The project resonated with classmates and instructors precisely because it didn't try to be impressive — it tried to be honest. The most rewarding feedback was that people felt they'd "actually learned something" about vehicle safety, not just looked at pretty charts.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">What I Took Away</div>
+        <h3>Lessons for the next one.</h3>
+        <p>The best data viz tool is the one that disappears. Every time I caught myself getting precious about a chart's design, I'd ask whether the chart was helping someone reach a conclusion — or just performing complexity. That filter quietly shaped every decision in the project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>Want to <em>dig in further?</em></h2>
+  <p>I'd love to walk you through either project in more detail, share code, or talk through architecture decisions over coffee. Reach out anytime.</p>
+  <a class="btn" href="index.html#contact">Get in touch →</a>
+  &nbsp;
+  <a class="btn btn-ghost" href="index.html">← Back to portfolio</a>
+</section>
+
+<footer>
+  <div>© <span id="year"></span> Athena Bao · Built with care in Seattle</div>
+  <div>Case Studies · v1.0</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

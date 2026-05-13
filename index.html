@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Athena Bao — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF7EC;
+    --ink: #1A1A2E;
+    --coral: #FF5A5F;
+    --hot: #FF2E93;
+    --lime: #B8FF5C;
+    --electric: #4D5BFF;
+    --yolk: #FFD93D;
+    --lavender: #D9C7FF;
+    --paper: #FFFCF5;
+    --line: #1A1A2E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--hot); color: var(--paper); }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 36px;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 247, 236, 0.7);
+    border-bottom: 2px solid var(--ink);
+  }
+  nav .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  nav .logo .dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--hot);
+    display: inline-block;
+    animation: pulse 2.4s infinite ease-in-out;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); background: var(--hot); }
+    50% { transform: scale(1.3); background: var(--electric); }
+  }
+  nav ul { list-style: none; display: flex; gap: 28px; }
+  nav ul a {
+    font-weight: 500; font-size: 15px;
+    position: relative; padding: 4px 2px;
+  }
+  nav ul a::after {
+    content: ""; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 3px; background: var(--hot);
+    transition: width 0.3s ease;
+  }
+  nav ul a:hover::after { width: 100%; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 36px 80px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    top: 12%; right: -120px;
+    width: 380px; height: 380px; border-radius: 50%;
+    background: radial-gradient(circle, var(--lavender) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero::after {
+    content: ""; position: absolute;
+    bottom: -80px; left: -80px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, var(--yolk) 0%, transparent 70%);
+    z-index: 0;
+    opacity: 0.6;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    padding: 8px 16px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 100px;
+    margin-bottom: 28px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .eyebrow .live {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 0 0 rgba(184, 255, 92, 0.7);
+    animation: live 1.8s infinite;
+  }
+  @keyframes live {
+    0% { box-shadow: 0 0 0 0 rgba(184, 255, 92, 0.7); }
+    100% { box-shadow: 0 0 0 12px rgba(184, 255, 92, 0); }
+  }
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 8vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+  }
+  h1.title .squiggle {
+    color: var(--hot);
+    font-style: italic;
+    display: inline-block;
+    position: relative;
+  }
+  h1.title .squiggle::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -10px;
+    height: 14px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 14'><path d='M0 7 Q 12.5 0 25 7 T 50 7 T 75 7 T 100 7' fill='none' stroke='%23FFD93D' stroke-width='4' stroke-linecap='round'/></svg>") repeat-x;
+    background-size: 60px 14px;
+  }
+  .hero-sub {
+    font-size: 20px;
+    max-width: 540px;
+    margin-bottom: 36px;
+    color: #2c2c44;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px;
+    border: 2px solid var(--ink);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .btn.alt { background: var(--paper); color: var(--ink); }
+  .btn.alt:hover { background: var(--lime); }
+
+  /* photo */
+  .hero-photo {
+    position: relative;
+    z-index: 1;
+    justify-self: center;
+  }
+  .photo-frame {
+    position: relative;
+    width: 380px; height: 460px;
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 14px 14px 0 var(--hot);
+    transform: rotate(-2.5deg);
+    transition: transform 0.4s ease;
+    overflow: hidden;
+  }
+  .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
+  .photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-tape {
+    position: absolute;
+    top: -16px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 110px; height: 28px;
+    background: rgba(255, 217, 61, 0.85);
+    border: 1px dashed rgba(0,0,0,0.2);
+  }
+  .floating-chip {
+    position: absolute;
+    padding: 10px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 100px;
+    background: var(--paper);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    box-shadow: 3px 3px 0 var(--ink);
+    z-index: 5;
+  }
+  .chip-1 { top: 30px; left: -40px; background: var(--lime); transform: rotate(-8deg); animation: float 5s ease-in-out infinite; }
+  .chip-2 { bottom: 60px; right: -60px; background: var(--electric); color: var(--paper); transform: rotate(6deg); animation: float 6s ease-in-out infinite 1s; }
+  .chip-3 { bottom: -20px; left: 20px; background: var(--hot); color: var(--paper); transform: rotate(-4deg); animation: float 5.5s ease-in-out infinite 0.5s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--r, -8deg)); }
+    50% { transform: translateY(-10px) rotate(var(--r, -8deg)); }
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    padding: 18px 0;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    animation: scroll 28s linear infinite;
+    white-space: nowrap;
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 60px; }
+  .marquee-track .star { color: var(--yolk); font-style: italic; }
+  .marquee-track .pop { color: var(--hot); font-style: italic; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  section { padding: 110px 36px; position: relative; }
+  .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 60px; flex-wrap: wrap; }
+  .sec-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6px 14px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+  h2.sec-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  h2.sec-title em { font-style: italic; color: var(--hot); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+  }
+  .about-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .about-card p { font-size: 18px; margin-bottom: 16px; }
+  .about-card p:last-child { margin-bottom: 0; }
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .stat {
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 24px;
+    background: var(--paper);
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.2s ease;
+  }
+  .stat:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .stat .lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    color: #5a5a72;
+  }
+  .stat:nth-child(1) { background: var(--yolk); }
+  .stat:nth-child(2) { background: var(--lime); }
+  .stat:nth-child(3) { background: var(--lavender); }
+  .stat:nth-child(4) { background: var(--coral); color: var(--paper); }
+  .stat:nth-child(4) .lbl { color: rgba(255,255,255,0.85); }
+
+  /* ---------- PROJECTS ---------- */
+  .projects { background: var(--paper); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .proj-list { display: flex; flex-direction: column; gap: 28px; }
+  .proj {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 32px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease;
+  }
+  .proj:hover { transform: translateY(-4px); }
+  .proj .visual {
+    border-radius: 14px;
+    aspect-ratio: 4/3;
+    border: 2px solid var(--ink);
+    background: var(--lavender);
+    display: grid; place-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-1 .visual { background: linear-gradient(135deg, #FF2E93, #4D5BFF); }
+  .proj-2 .visual { background: linear-gradient(135deg, #B8FF5C, #FFD93D); }
+  .proj .vis-shape {
+    width: 70%; height: 70%;
+    border: 3px solid var(--paper);
+    border-radius: 50%;
+    position: relative;
+  }
+  .proj-1 .vis-shape::before, .proj-1 .vis-shape::after {
+    content: ""; position: absolute; border: 3px solid var(--paper);
+  }
+  .proj-1 .vis-shape::before {
+    width: 60%; height: 60%; border-radius: 50%; top: 20%; left: 20%;
+  }
+  .proj-1 .vis-shape::after {
+    width: 30%; height: 30%; border-radius: 50%; top: 35%; left: 35%;
+    background: var(--yolk);
+  }
+  .proj-2 .vis-shape {
+    border-radius: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: end;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(26,26,46,0.06);
+  }
+  .proj-2 .vis-shape .bar { background: var(--ink); border-radius: 3px 3px 0 0; }
+  .proj-2 .vis-shape .bar:nth-child(1) { height: 40%; }
+  .proj-2 .vis-shape .bar:nth-child(2) { height: 80%; }
+  .proj-2 .vis-shape .bar:nth-child(3) { height: 55%; }
+  .proj-2 .vis-shape .bar:nth-child(4) { height: 95%; background: var(--hot); }
+  .proj-2 .vis-shape .bar:nth-child(5) { height: 65%; }
+
+  .proj-meta { display: flex; flex-direction: column; justify-content: center; }
+  .proj-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    width: fit-content;
+    letter-spacing: 0.05em;
+  }
+  .proj h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .proj p { font-size: 16px; margin-bottom: 18px; color: #2c2c44; }
+  .proj ul {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .proj ul li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+  .proj ul li::before {
+    content: "→";
+    position: absolute; left: 0; top: 0;
+    color: var(--hot);
+    font-weight: 700;
+  }
+  .stack { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stack span {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-list { display: flex; flex-direction: column; gap: 0; border-top: 2px solid var(--ink); }
+  .exp-row {
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 2px solid var(--ink);
+    align-items: start;
+    transition: background 0.2s ease;
+    position: relative;
+  }
+  .exp-row:hover { background: var(--paper); padding-left: 16px; padding-right: 16px; margin: 0 -16px; border-radius: 4px;}
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #5a5a72;
+  }
+  .exp-role h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 26px;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .exp-role .org {
+    font-weight: 600; font-size: 16px;
+    color: var(--hot);
+    margin-bottom: 12px;
+  }
+  .exp-role p { font-size: 15px; color: #2c2c44; max-width: 640px; }
+  .exp-loc {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: #5a5a72;
+    white-space: nowrap;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-section { background: var(--ink); color: var(--paper); }
+  .skills-section .sec-num { background: var(--paper); color: var(--ink); }
+  .skills-section h2.sec-title em { color: var(--yolk); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .skill-card {
+    border: 2px solid var(--paper);
+    border-radius: 18px;
+    padding: 28px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .skill-card:hover { background: var(--paper); color: var(--ink); }
+  .skill-card h5 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 22px;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .skill-card .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-card .pills span {
+    border: 1.5px solid currentColor;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact {
+    text-align: center;
+    padding: 130px 36px;
+    position: relative;
+  }
+  .contact h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 9vw, 140px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+  }
+  .contact h2 em { font-style: italic; color: var(--hot); }
+  .contact p { font-size: 19px; max-width: 560px; margin: 0 auto 36px; color: #2c2c44; }
+  .email-big {
+    display: inline-block;
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3.4vw, 40px);
+    padding: 18px 36px;
+    border: 3px solid var(--ink);
+    border-radius: 100px;
+    background: var(--yolk);
+    box-shadow: 8px 8px 0 var(--ink);
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    letter-spacing: -0.02em;
+  }
+  .email-big:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--ink); background: var(--lime); }
+  .socials {
+    margin-top: 44px;
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+  .socials a {
+    padding: 10px 22px;
+    border: 2px solid var(--ink);
+    border-radius: 100px;
+    background: var(--paper);
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+  }
+  .socials a:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); background: var(--lavender); }
+
+  footer {
+    border-top: 2px solid var(--ink);
+    padding: 28px 36px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-section {
+    background: var(--bg);
+    position: relative;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .g-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; flex-direction: column;
+  }
+  .g-card:hover {
+    transform: translate(-4px, -4px) rotate(-0.5deg);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .g-1 { transform: rotate(-1.2deg); }
+  .g-2 { transform: rotate(1deg); }
+  .g-3 { transform: rotate(-0.8deg); }
+  .g-4 { transform: rotate(1.4deg); }
+  .g-1:hover, .g-2:hover, .g-3:hover, .g-4:hover { transform: rotate(0) translate(-4px,-4px); }
+  .g-img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--lavender);
+    border-bottom: 2px solid var(--ink);
+  }
+  .g-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .g-card:hover .g-img img { transform: scale(1.04); }
+  .g-card figcaption {
+    padding: 18px 18px 22px;
+  }
+  .g-card .g-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+  }
+  .g-1 .g-tag { background: var(--hot); }
+  .g-2 .g-tag { background: var(--electric); }
+  .g-3 .g-tag { background: var(--coral); }
+  .g-4 .g-tag { background: var(--ink); }
+  .g-card h5 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.05;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .g-card p {
+    font-size: 14px;
+    color: #2c2c44;
+    line-height: 1.45;
+  }
+
+  /* ---------- DECOR BLOBS ---------- */
+  .blob {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+    section { padding: 80px 20px; }
+    .hero { grid-template-columns: 1fr; gap: 60px; padding: 110px 20px 60px; text-align: left; }
+    .photo-frame { width: 280px; height: 340px; box-shadow: 10px 10px 0 var(--hot); }
+    .chip-1 { left: -10px; }
+    .chip-2 { right: -20px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .proj { grid-template-columns: 1fr; padding: 24px; }
+    .exp-row { grid-template-columns: 1fr; gap: 8px; }
+    .exp-loc { display: none; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .marquee-track { font-size: 20px; gap: 32px; }
+    .marquee-track span { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="dot"></span>athena.bao</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-text">
+    <div class="eyebrow"><span class="live"></span>Available — Open to opportunities · Class of '26</div>
+    <h1 class="title">Hi, I'm Athena —<br>I build <span class="squiggle">curious</span> things.</h1>
+    <p class="hero-sub">CS + Business student at the University of Washington, fintech tinkerer, community builder, and proud overachiever in the art of trying new things.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#work">See my work →</a>
+      <a class="btn alt" href="#contact">Say hi 👋</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <span class="floating-chip chip-1">CS @ UW 🌸</span>
+    <span class="floating-chip chip-2">President, WiC</span>
+    <span class="floating-chip chip-3">Cloud + Code</span>
+    <div class="photo-frame">
+      <div class="photo-tape"></div>
+      <img src="Athena Headshot.jpg" alt="Athena Bao headshot" />
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>
+      Software Engineer ✦ <em class="star">Builder</em> ✦ Community Leader ✦ <em class="pop">Curious</em> ✦ Cloud + Fintech ✦ <em class="star">Designer-y</em> ✦ Always learning ✦
+    </span>
+    <span aria-hidden="true">
+      Software Engineer ✦ <em class="star">Builder</em> ✦ Community Leader ✦ <em class="pop">Curious</em> ✦ Cloud + Fintech ✦ <em class="star">Designer-y</em> ✦ Always learning ✦
+    </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-head">
+    <div>
+      <span class="sec-num">01 / About</span>
+      <h2 class="sec-title">A little <em>about me.</em></h2>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <p>I'm a junior at the <strong>University of Washington's Paul G. Allen School</strong>, studying Computer Science with a minor in Business — a combo I picked because I can never quite resist the question, "okay, but how does this actually <em>get used</em>?"</p>
+      <p>My happiest projects sit at the intersection of <strong>technical depth and human impact</strong>: a fintech platform for community-driven lending, a data viz tool that surfaces traffic-safety patterns, a women-in-tech org I get to lead.</p>
+      <p>I love clean code, well-considered design, and the small moment when an idea finally clicks. Outside of class you'll find me running events, mentoring new CS students, or pretending the cherry blossoms outside my dorm aren't distracting me.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">400+</div>
+        <div class="lbl">WiC Members Led</div>
+      </div>
+      <div class="stat">
+        <div class="num">12wk</div>
+        <div class="lbl">Cloud Internship</div>
+      </div>
+      <div class="stat">
+        <div class="num">7+</div>
+        <div class="lbl">Languages Spoken (Programming, that is)</div>
+      </div>
+      <div class="stat">
+        <div class="num">∞</div>
+        <div class="lbl">Coffees Consumed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="work">
+  <div class="sec-head">
+    <div>
+      <span class="sec-num">02 / Selected Work</span>
+      <h2 class="sec-title">Things I've <em>built.</em></h2>
+    </div>
+    <p style="max-width: 360px; font-size: 16px; color: #2c2c44;">A handful of projects I've poured time, caffeine, and curiosity into.</p>
+  </div>
+
+  <div class="proj-list">
+
+    <article class="proj proj-1">
+      <div class="visual"><div class="vis-shape"></div></div>
+      <div class="proj-meta">
+        <span class="proj-tag">Fintech · In Progress</span>
+        <h3>Apexys</h3>
+        <p>A community-driven lending and investment platform where small groups pool capital, transparently track loans, and distribute interest fairly.</p>
+        <ul>
+          <li>Spearheaded the technology strategy and overall architecture from scratch.</li>
+          <li>Built a modular REST API with JWT auth supporting communities, loans, fund transactions, and real-time messaging.</li>
+          <li>Designed endpoints for transaction logs, repayment tracking, and interest distribution — full audit trail by default.</li>
+        </ul>
+        <div class="stack">
+          <span>Python</span><span>Express.js</span><span>JWT</span><span>REST</span><span>System Design</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj proj-2">
+      <div class="visual">
+        <div class="vis-shape">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <span class="proj-tag">Data Viz · March 2026</span>
+        <h3>Safety First</h3>
+        <p>An interactive data viz platform for exploring vehicle safety and traffic fatality data — designed to make hidden patterns finally visible.</p>
+        <ul>
+          <li>Built visualizations with Vega-Lite and D3.js to reveal links between vehicle traits and fatality rates.</li>
+          <li>Implemented filtering, aggregation, and comparison so users can interrogate large datasets without writing a line of code.</li>
+          <li>Focused on accessible color, clear annotation, and a narrative that turns numbers into stories.</li>
+        </ul>
+        <div class="stack">
+          <span>JavaScript</span><span>Vega-Lite</span><span>D3.js</span><span>Data Viz</span><span>UX</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+  <div style="text-align:center; margin-top: 52px;">
+    <a class="btn" href="case-studies.html">Read the full case studies →</a>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-head">
+    <div>
+      <span class="sec-num">03 / Experience</span>
+      <h2 class="sec-title">Where I've <em>worked.</em></h2>
+    </div>
+  </div>
+
+  <div class="exp-list">
+    <div class="exp-row">
+      <div class="exp-date">Jan 2026 → Present</div>
+      <div class="exp-role">
+        <h4>Student Technician Assistant</h4>
+        <div class="org">UW Department of Medicine</div>
+        <p>Imaging and configuring desktops and laptops for faculty and staff, deploying secure system images, and supporting hardware/software setup in a healthcare environment where accuracy isn't optional.</p>
+      </div>
+      <div class="exp-loc">Seattle, WA</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-date">Jun 2025 → Sep 2025</div>
+      <div class="exp-role">
+        <h4>Cloud Engineer Intern</h4>
+        <div class="org">Stanley 1913</div>
+        <p>A 12-week cloud modernization project: migrated legacy tape backups to Azure Blob via Data Factory, configured SAML/OIDC SSO in Microsoft Entra ID for SaaS apps, resolved IT tickets across cloud and network, and wrote training docs that cut onboarding time for the team.</p>
+      </div>
+      <div class="exp-loc">Seattle, WA</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-date">Jun 2024 → Present</div>
+      <div class="exp-role">
+        <h4>President · Women in Computing</h4>
+        <div class="org">Paul G. Allen School RSO</div>
+        <p>Directing the officer board and committees for a 400+ member org. Partnering with Uber, Google, and Pinterest on networking dinners, speaker panels, and pro-dev events — plus launching new outreach like the Women in Computing Careers Speaker Series with WE Lead.</p>
+      </div>
+      <div class="exp-loc">Seattle, WA</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-date">Sep 2023 → Dec 2026</div>
+      <div class="exp-role">
+        <h4>B.S. Computer Science, Minor in Business</h4>
+        <div class="org">University of Washington · Paul G. Allen School</div>
+        <p>Coursework spanning Data Structures, Software Interface, Hardware Interface, Linear Algebra, Calculus, Data Management, Computer Security, and Artificial Intelligence.</p>
+      </div>
+      <div class="exp-loc">Seattle, WA</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery-section">
+  <div class="sec-head">
+    <div>
+      <span class="sec-num">04 / Gallery</span>
+      <h2 class="sec-title">Life <em>outside the IDE.</em></h2>
+    </div>
+    <p style="max-width: 380px; font-size: 16px; color: #2c2c44;">When I'm not building things on a screen, I'm usually running long distances, getting lost in ancient places, or surrounded by my favorite people.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <figure class="g-card g-1">
+      <div class="g-img"><img src="photos/pyramids.jpg" alt="Athena in front of the Sphinx and Pyramids of Giza" /></div>
+      <figcaption>
+        <span class="g-tag">Travel</span>
+        <h5>Giza, Egypt</h5>
+        <p>Wandering 4,500 years of history. Best office view I've ever had.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="g-card g-2">
+      <div class="g-img"><img src="photos/half-marathon.jpg" alt="Athena holding a medal after the Seattle Half Marathon" /></div>
+      <figcaption>
+        <span class="g-tag">Running</span>
+        <h5>13.1 in Seattle</h5>
+        <p>Half-marathon medal earned the old-fashioned way: one stubborn mile at a time.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="g-card g-3">
+      <div class="g-img"><img src="photos/colossi.jpg" alt="Athena at the Colossi of Memnon in Luxor" /></div>
+      <figcaption>
+        <span class="g-tag">Travel</span>
+        <h5>Colossi of Memnon</h5>
+        <p>Sandstorm and a maxi skirt — Luxor turned out to be one of my favorite days of travel.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="g-card g-4">
+      <div class="g-img"><img src="photos/wic-cherry-blossoms.jpg" alt="Athena with the Women in Computing officer board under cherry blossoms" /></div>
+      <figcaption>
+        <span class="g-tag">Community</span>
+        <h5>Women in Computing</h5>
+        <p>The officer board that makes 400+ members feel at home in the Allen School.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="sec-head">
+    <div>
+      <span class="sec-num">05 / Toolbox</span>
+      <h2 class="sec-title">My <em>toolbox.</em></h2>
+    </div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h5>Languages</h5>
+      <div class="pills">
+        <span>Java</span><span>Python</span><span>C</span><span>JavaScript</span><span>TypeScript</span><span>HTML</span><span>CSS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h5>Frameworks &amp; Libraries</h5>
+      <div class="pills">
+        <span>React.js</span><span>React Native</span><span>Express.js</span><span>D3.js</span><span>Vega-Lite</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h5>Tools &amp; Platforms</h5>
+      <div class="pills">
+        <span>Git</span><span>GitHub</span><span>Azure</span><span>AWS (DynamoDB)</span><span>Vercel</span><span>Jira</span><span>IntelliJ</span><span>VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <span class="sec-num">06 / Get in touch</span>
+  <h2>Let's make <em>something.</em></h2>
+  <p>I'm actively looking for new-grad and internship opportunities for 2026. If you're hiring, collaborating, or just want to chat about cherry blossoms — my inbox is open.</p>
+  <a class="email-big" href="mailto:albao@cs.washington.edu">albao@cs.washington.edu →</a>
+  <div class="socials">
+    <a href="https://linkedin.com/in/athena-bao-419146246/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="https://github.com/athenabao" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="tel:+14256281517">425-628-1517</a>
+  </div>
+</section>
+
+<footer>
+  <div>© <span id="year"></span> Athena Bao · Built with care in Seattle</div>
+  <div>Designed &amp; coded by yours truly ✦</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Light parallax on hero photo
+  const photo = document.querySelector('.photo-frame');
+  if (photo) {
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 6;
+      const y = (e.clientY / window.innerHeight - 0.5) * 6;
+      photo.style.transform = `rotate(${-2.5 + x*0.3}deg) translate(${x}px, ${y}px)`;
+    });
+  }
+</script>
+
+</body>
+</html>
